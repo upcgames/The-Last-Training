@@ -3,10 +3,10 @@
 
 ## Introducción
 
-#### Problema
+#### (a) Problema
 En una desesperación por querer vencer a Savitar, Barry Allen mejor conocido como "The Flash" convoca a una reunión de velocitas a la que asisten Wally West "Kid Flash" y Jessie Wells "Jessie Quick". Dadas las circunstancias llegan a la conclusión de que deben hacer un entrenamiento de sus capacidades (velocidad y toma de decisión) en un escenario lleno de misiones con distintas dificultades. 
 
-#### Objetivo
+#### (b) Objetivo
 Para evaluar quien es el mejor tienen que empezar en un punto, haber cumplido todas las misiones planteadas en el mapa y luego terminar en otro. Gracias a esto se pueden evidenciar algoritmos de busqueda y optimización para la toma de decisiones y encontrar el camino más corto hacia la meta.
 
 
