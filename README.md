@@ -8,19 +8,13 @@
 ## Enunciado
 Trabajo Final del curso de Complejidad Algorítmica, consiste en la elaboración de un juego que, en una primera etapa haga uso de algoritmos de búsqueda y en una segunda etapa algoritmos de optimización basados en algoritmos codiciosos y (o) programación dinámica.
 
-
-
 ## Introducción
 ### :boom: Problema
-En una desesperación por querer vencer a Savitar, Barry Allen mejor conocido como "The Flash" convoca a una reunión de velocitas a la que asisten Wally West "Kid Flash" y Jessie Wells "Jessie Quick". Dadas las circunstancias llegan a la conclusión de que deben hacer un entrenamiento de sus capacidades (velocidad y toma de decisión) en un escenario lleno de misiones con distintas dificultades. 
-
+En una desesperación por querer vencer a Savitar, Barry Allen mejor conocido como "The Flash" convoca a una reunión de velocitas a la que asisten Wally West "Kid Flash" y Jessie Wells "Jessie Quick". Dadas las circunstancias llegan a la conclusión de que deben hacer un entrenamiento de sus capacidades (velocidad y toma de decisión) en un escenario lleno de misiones con distintas dificultades.
 ### :boom: Objetivo
 Para evaluar quien es el mejor tienen que empezar en un punto, haber cumplido todas las misiones planteadas en el mapa y luego terminar en otro. Gracias a esto se pueden evidenciar algoritmos de busqueda y optimización para la toma de decisiones y encontrar el camino más corto hacia la meta.
 
-
-
 ## Marco Conceptual
-
 ### :boom: Algoritmo de Prim
 El algoritmo de Prim es un algoritmo perteneciente a la teoría de los grafos para encontrar un árbol recubridor mínimo en un grafo conexo, no dirigido y cuyas aristas están etiquetadas.
 En otras palabras, el algoritmo encuentra un subconjunto de aristas que forman un árbol con todos los vértices, donde el peso total de todas las aristas en el árbol es el mínimo posible. Si el grafo no es conexo, entonces el algoritmo encontrará el árbol recubridor mínimo para uno de los componentes conexos que forman dicho grafo no conexo.
@@ -37,9 +31,7 @@ La idea subyacente en este algoritmo consiste en ir explorando todos los caminos
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif">
 </div>
 
-
 ## Tipos de Datos Abstractos
-
 ### :boom: Cola de Prioridades
 Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad será desencolado antes que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
 
