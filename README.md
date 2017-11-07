@@ -53,6 +53,9 @@ Desde un punto de vista práctico, los grafos permiten estudiar las interrelacio
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/6n-graf.svg">
 </div>
 
+## Espacio de Búsqueda
+[Aún no Disponible]
+
 
 ## SOBRE UPC LAB Y UPC GAMES
 > En UPC LAB Somos un grupo de  de gente apasionada por la tecnología, que nos gusta desarrollar aplicaciones de todo tipo.
