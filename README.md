@@ -5,6 +5,11 @@
   <img src="https://media.giphy.com/media/fW56oUG0CiYjC/giphy.gif">
 </div>
 
+| Windows | Mac | Linux |
+|:-------------:|:---------:|:-------------------:|
+|  **Version web** | **Version web** | **Version web** |
+| [Aún no Disponible] | - | - |
+
 ## Enunciado
 Trabajo Final del curso de Complejidad Algorítmica, consiste en la elaboración de un juego que, en una primera etapa haga uso de algoritmos de búsqueda y en una segunda etapa algoritmos de optimización basados en algoritmos codiciosos y (o) programación dinámica.
 
