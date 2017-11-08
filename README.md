@@ -5,11 +5,12 @@
   <img src="https://media.giphy.com/media/fW56oUG0CiYjC/giphy.gif">
 </div>
 
+---
+
 | Windows | Mac | Linux |
 |:-------------:|:---------:|:-------------------:|
 |  **Version web** | **Version web** | **Version web** |
 | [Aún no Disponible] | - | - |
-
 
 
 ## Enunciado
