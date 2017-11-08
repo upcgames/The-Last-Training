@@ -10,6 +10,8 @@
 |  **Version web** | **Version web** | **Version web** |
 | [Aún no Disponible] | - | - |
 
+
+
 ## Enunciado
 Trabajo Final del curso de Complejidad Algorítmica, consiste en la elaboración de un juego que, en una primera etapa haga uso de algoritmos de búsqueda y en una segunda etapa algoritmos de optimización basados en algoritmos codiciosos y (o) programación dinámica.
 
@@ -40,7 +42,7 @@ La idea subyacente en este algoritmo consiste en ir explorando todos los caminos
 ### Cola de Prioridades
 Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad será desencolado antes que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
 
-<div align="center">
+<div align="center" height="300px" width="300px">
   <img src="https://netmatze.files.wordpress.com/2014/08/priorityqueue.png">
 </div>
 
