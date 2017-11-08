@@ -42,7 +42,7 @@ La idea subyacente en este algoritmo consiste en ir explorando todos los caminos
 ### Cola de Prioridades
 Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad será desencolado antes que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
 
-<div align="center" height="300px" width="300px">
+<div align="center">
   <img src="https://netmatze.files.wordpress.com/2014/08/priorityqueue.png">
 </div>
 
