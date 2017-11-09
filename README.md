@@ -57,7 +57,8 @@ Desde un punto de vista práctico, los grafos permiten estudiar las interrelacio
 </div>
 
 ## Espacio de Búsqueda
-[Aún no Disponible]
+Cuando se resuelve un problema, se busca la mejor solución entre un conjunto de posibles soluciones. Al conjunto de todas las posibles soluciones a un problema concreto se llama espacio de búsqueda. Cada punto en el espacio de búsqueda representa una posible solución. Cada posible solución se le puede asociar un fitness o un valor que indicará cómo de buena es la solución para el problema. Un algoritmo genético (AG) devolverá la mejor solución de entre todas las posibles que tenga en un momento dado.
+
 
 
 ## SOBRE UPC LAB Y UPC GAMES
