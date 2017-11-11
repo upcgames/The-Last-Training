@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			/*#myCanvas{
+				width:800px;
+				height:800px;
+			}*/
+		</style>
+	</head>
+	<body>
+
+
+
+		<canvas id="myCanvas"></canvas>
+
+
+
+
+
+		<!-- jQuery -->
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<!--script src="Hello World"></script -->
+
+	<script> 
+
+		//useful functions
+		function componentToHex(c) {
+			var hex = c.toString(16);
+			return hex.length == 1 ? "0" + hex : hex;}
+
+		function rgbToHex(r, g, b) {
+			return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);}
+
+		//funciones juego
+
+	 	//crear una "montaña" en el terreno de juego
+		function makeMountain(terreno){
+
+			var size_x = terreno.length;
+			var size_y = 0;
+			if(size_x > 0) size_y = terreno[0].length;
+			var d = new Date();
+			//ms = mountain summit
+			var ms_x = Math.round(Math.random()*(size_x-1) % d.getTime());
+
+			var ms_y = Math.round(Math.random()*(size_y-1) % d.getTime());;
+
+
+			height_summit  = Math.round(Math.random()*20);
+			//if( mapa[ms_y][ms_x] < height_summit) mapa[ms_y][ms_x] = height_summit; // height of summit 
+			terreno[ms_y][ms_x].h = terreno[ms_y][ms_x].h + height_summit;
+
+			for (var i = height_summit; i>=0; i-- ){
+				concentricos(terreno, i, ms_x, ms_y)
+			}}	
+
+		//crear circulos concentricos dada una posicion y un radio, se usa por makeMountain
+		function concentricos (mapa, radius, c_x, c_y){
+				for (var i = -radius; i <= radius; i++){
+					for (var j = -radius; j <= radius; j++){
+						if((c_x+i)>=0 && (c_y+j) >= 0 && (c_x+i) < mapa.length && (c_y+j) < mapa.length){
+							/*if(mapa[c_y+j][c_x+i] < (height_summit-radius)){
+								mapa[c_y+j][c_x+i] = height_summit-radius
+							}
+							else {
+								console.log("otro: " + mapa[c_y+j][c_x+i] + " - " + (height_summit-radius)) }
+								*/
+								mapa[c_y+j][c_x+i].h = 	mapa[c_y+j][c_x+i].h +  height_summit-radius
+								//if (mapa[c_y+j][c_x+i].h > 255) mapa[c_y+j][c_x+i].h = 255
+						}
+					}
+				}}
+
+		//pinta el mapa dada la matriz
+		function pintarMapa(mapa, s_sq, canvas,context, ver_distancias){
+				context.font="10px Georgia";
+
+				for (var i = 0; i < mapa.length; i++){
+					for (var j = 0; j < mapa[0].length; j++){
+						pintar_distancias = ver_distancias; // true si quieres que pinte, false si no,
+						if(mapa[j][i].d < 1000 && pintar_distancias){
+							context.fillStyle = "green";
+							context.fillText(String(mapa[j][i].d), i*s_sq,j*s_sq, s_sq)
+							}  // esto imprime las distancias del origen
+
+						mapa[j][i].h *= 2;
+						//console.log(rgbToHex(mapa[j][i]*8, mapa[j][i]*8, 30))
+						var r=0, g = 0, b=0;
+						if (mapa[j][i].h < 255) r = mapa[j][i].h;
+						else{ r = 255;
+							if (mapa[j][i].h-255 < 255) g = mapa[j][i].h -255;
+							else{ g = 255;
+								if (mapa[j][i].h-510< 255) b = mapa[j][i].h -510;
+								else {
+									b = 255;
+								}  
+							}
+
+						}
+						context.fillStyle = rgbToHex(r, g, b)
+						context.fillRect(i*s_sq,j*s_sq,s_sq,s_sq);
+
+						}
+					}}
+		
+		//djikstra
+		function distancias(mapa, nodo_origen, size_map){
+			//console.log("y: " + y + " x: " + x)
+			var y = nodo_origen.y;
+			var x = nodo_origen.x;
+
+			for (var i = -1; i <= 1; i++) {
+				for (var j = -1; j <= 1; j++) {
+					if((x+i) < size_map && (y+j) < size_map && (x+i) >= 0 && (y+j) >= 0){
+						var nodo = mapa[y+j][x+i];
+						if(!nodo.v && nodo != nodo_origen){
+							var dif = 0
+							if (nodo.h < nodo_origen.h)  dif = 1; //bajar  me cuesta 1
+							if (nodo.h == nodo_origen.h)  dif = 2; //avanzar me cuesta 2
+							if (nodo.h > nodo_origen.h)  dif = 3; //subir me cuesta 3
+
+							//if (mapa[y+j][x+i].d > 99999) mapa[y+j][x+i].d = 0;
+
+							if( mapa[y+j][x+i].d  > dif + nodo_origen.d) {
+								mapa[y+j][x+i].d  = dif + nodo_origen.d //asigna nueva distancia
+								mapa[y+j][x+i].padre = nodo_origen; //asigna nuevo padre 
+							}
+							}
+					}
+					}
+				}	
+				nodo_origen.v = true;
+
+				return nodo_origen;
+			} 
+
+		// objeto Nodo
+		function nodo(height){
+			this.x = 0;
+			this.y = 0;
+			this.h = height;
+			this.d = 999999;
+			this.v = false;
+			this.padre = null;} 
+
+		//imprime mapa el camino de menor recorrido
+		function imprimirCamino(nodo, s_sq, size_linea, color){
+				context.strokeStyle= color
+				context.lineWidth = size_linea
+				if(nodo.padre != null){
+					context.moveTo(nodo.x*s_sq, nodo.y*s_sq)
+					context.lineTo(nodo.padre.x*s_sq, nodo.padre.y*s_sq)
+
+					context.font="10px Georgia";
+					context.fillStyle = "black"
+
+					context.fillText(String(nodo.d), nodo.x*s_sq+20, nodo.y*s_sq+20);
+					imprimirCamino(nodo.padre, s_sq, size_linea, color);		
+					context.stroke()
+				}
+			}
+
+		//halla el nodo con la menor distancia del mapa
+		function hallar_menor_nodo(mapa, size_map){
+			var min_x, min_y;
+			var distancia = 999999;
+			for (var i = 0; i < size_map; i++) {
+				for (var j = 0; j < size_map; j++) {
+					//debugger
+					if (mapa[j][i].v ==false && mapa[j][i].d < distancia){
+						min_x = i; min_y=j; distancia = mapa[j][i].d;
+					}
+				}
+			}
+			return mapa[min_y][min_x];
+			}			
+
+
+		function crearMapa(mapa, size_map){
+
+			for (var i = 0; i < size_map; i++){ //crea el arreglo del mapa
+				mapa.push(new Array(size_map));
+			}
+			for (var i = 0; i < size_map; i++){ //crea el arreglo del mapa
+				for (var j = 0; j < size_map; j++){
+					mapa[j][i] = new nodo(0);
+					mapa[j][i].x = i;
+					mapa[j][i].y = j;
+				}}
+
+		}
+
+		//dibuja bases en la matriz
+		function generaBases(mapa, arreglo, size_map){			
+
+			arreglo[0] = [Math.round(Math.random()*size_map),Math.round(Math.random()*size_map)]
+			arreglo[1] = [Math.round(Math.random()*size_map),Math.round(Math.random()*size_map)]
+			mapa[arreglo[0][0]][arreglo[0][1]].d = 0; //hace que el inicio tenga distancia 0
+		}
+
+		function generarMontañas(mapa, cantidad){
+			//crea las montañas para hhacer el mapa "dinamico"
+			for (var i = 0; i < cantidad; i++) {
+				makeMountain(mapa);
+			}
+			
+		}
+
+		function hallarRecorridoMinimo(mapa, size_map, nodo_final){
+			while(true){
+				var menor_nodo = hallar_menor_nodo(mapa, size_map)
+				//console.log("min_x: " + min_x + " min_y: " + min_y);
+				if (distancias(mapa, menor_nodo,size_map)== nodo_final)
+					 break; //hasta que encuentre el nodo.
+				}
+		}
+		function imprimirBases(arr_bases, s_sq){
+			context.font="10px Georgia";
+
+			context.fillStyle = "white"
+			context.fillRect(arr_bases[0][1]*s_sq, arr_bases[0][0]*s_sq, 10, 10); //start
+			context.fillRect(arr_bases[1][1]*s_sq, arr_bases[1][0]*s_sq, 10, 10); //end
+			
+			context.fillStyle = "black"
+			context.fillText(String("A"), arr_bases[0][1]*s_sq+2, arr_bases[0][0]*s_sq+9, 7);
+			context.fillText(String("B"), arr_bases[1][1]*s_sq+2, arr_bases[1][0]*s_sq+9, 7);
+			
+
+			//imprime distancia final
+
+			context.font="20px Georgia";
+			//context.fillText(String(mapa[arr_bases[1][0]][arr_bases[1][1]].d),arr_bases[1][1]*s_sq+20, arr_bases[1][0]*s_sq+10)
+
+		}
+		function IniciarJuego(size_map, s_sq, ver_distancias){
+			canvas.width = canvas.height = size_map*s_sq;
+
+			var mapa = []; //iniciacion de mapa
+
+			crearMapa(mapa, size_map);
+
+			var arr_bases = new Array();
+
+			generaBases(mapa, arr_bases, size_map);
+
+			generarMontañas(mapa, 200); // mapa cantidad
+
+			hallarRecorridoMinimo(mapa, size_map, mapa[arr_bases[1][0]][arr_bases[1][1]])
+			
+			pintarMapa(mapa, s_sq,  canvas, context, ver_distancias);
+
+			imprimirCamino(mapa[arr_bases[1][0]][arr_bases[1][1]], s_sq, "4", "green")
+
+			imprimirBases(arr_bases, s_sq);
+
+			console.log(mapa);
+		}
+		function JuegoPorSteps(size_map, s_sq){
+
+			canvas.width = canvas.height = size_map*s_sq;
+			var mapa = []; //iniciacion de mapa
+
+			crearMapa(mapa, size_map);
+
+			var arr_bases = new Array();
+			generaBases(mapa, arr_bases, size_map);
+
+			var id = window.setInterval(function(){
+				if (step(mapa, s_sq, 10, mapa[arr_bases[1][0]][arr_bases[1][1]], arr_bases)) window.clearInterval(id);
+			}, 1000)
+
+			//generarMontañas(mapa, 200); // mapa cantidad
+			//hallarRecorridoMinimo(mapa, size_map, mapa[arr_bases[1][0]][arr_bases[1][1]])
+			
+			//imprimirCamino(mapa[arr_bases[1][0]][arr_bases[1][1]], s_sq, "4", "green")
+
+			imprimirBases(arr_bases, s_sq);
+
+			console.log(mapa);
+		}
+
+		function step(mapa, s_sq, montañas, nodo_final, arr_bases){
+			generarMontañas(mapa, montañas);
+
+			var se_encontro = false;
+
+			for (var i = 0; i < 10; i++){
+				var menor_nodo = hallar_menor_nodo(mapa, mapa.length)
+				//console.log("min_x: " + min_x + " min_y: " + min_y);
+				if (distancias(mapa, menor_nodo, mapa.length)== nodo_final){
+					se_encontro = true;
+					break;
+					}
+				}
+
+			pintarMapa(mapa, s_sq,  canvas, context);
+			imprimirBases(arr_bases, s_sq);
+
+			if (se_encontro) return true;
+			else return false;
+
+		}
+	</script>
+	
+	<script>
+
+
+			// imprime bases
+
+			var canvas = document.getElementById("myCanvas");
+			var context = canvas.getContext("2d");
+
+			//JuegoPorSteps(100, 8) //this doesnt work yet <----
+			IniciarJuego(100, 8, false); 
+			
+
+		</script>
+		
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
