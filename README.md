@@ -64,6 +64,7 @@ o un valor que indicará cómo de buena es la solución para el problema. Un alg
 solución de entre todas las posibles que tenga en un momento dado.
 
 
+
 ## SOBRE UPC LAB Y UPC GAMES
 > En UPC LAB Somos un grupo de  de gente apasionada por la tecnología, que nos gusta desarrollar aplicaciones de todo tipo.
 > También ayudamos y hacemos aplicaciones, si quieres más información escribe a: <upclabperu@gmail.com>.
