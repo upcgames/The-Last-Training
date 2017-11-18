@@ -1,0 +1,24 @@
+{
+  "name": "The-Last-Training",
+  "version": "1.0.0",
+  "description": ":zap: Can you be the fastest man in the world?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --files '*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upcgames/The-Last-Training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upcgames/The-Last-Training/issues"
+  },
+  "homepage": "https://github.com/upcgames/The-Last-Training#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  }
+}
