@@ -1,75 +1,48 @@
 //Constants
 const log = console.log;
-const canvas = new PIXI.Application();
-const WIDTH = canvas.screen.width;
-const HEIGHT = canvas.screen.height;
-
-//Game
-function keyboard(keyCode) {
-  let key = {};
-  key.code = keyCode;
-  key.isDown = false;
-  key.isUp = true;
-  key.press = undefined;
-  key.release = undefined;
-  //The `downHandler`
-  key.downHandler = function(event) {
-    if (event.keyCode === key.code) {
-      if (key.isUp && key.press) key.press();
-      key.isDown = true;
-      key.isUp = false;
-    }
-    event.preventDefault();
-  };
-
-  //The `upHandler`
-  key.upHandler = function(event) {
-    if (event.keyCode === key.code) {
-      if (key.isDown && key.release) key.release();
-      key.isDown = false;
-      key.isUp = true;
-    }
-    event.preventDefault();
-  };
-
-  //Attach event listeners
-  window.addEventListener("keydown", key.downHandler.bind(key), false);
-  window.addEventListener("keyup", key.upHandler.bind(key), false);
-  return key;
-}
+const renderer = new PIXI.Application(660,660);
+const screen = renderer.screen;
+const canvas = renderer.view;
+const stage = renderer.stage;
+const ticker = renderer.ticker;
+const WIDTH = screen.width;
+const HEIGHT = screen.height;
+const bump = new Bump();
 
 //Keys Movement
-let LEFT = keyboard(65),
-  RIGHT = keyboard(68),
-  UP = keyboard(87),
-  DOWN = keyboard(83);
+let LEFT = util.keyboard(65),
+  RIGHT = util.keyboard(68),
+  UP = util.keyboard(87),
+  DOWN = util.keyboard(83);
 
 function gameStart() {
-  document.body.appendChild(canvas.view);
+  document.body.appendChild(canvas);
+  let ciudad = new Ciudad(stage);
+  util.drawReference(stage,ciudad);
   let barryAllen = new Speedster(
-    canvas,
+    stage,
     "./assets/sprites/theFlash_sprite.png", //Sprite URL
     0, //x position
     0, //y position
     10 //amount of Speed Force (lulz :v)
   );
-  canvas.ticker.add(() => {
+  ticker.add(() => {
     switch (true) {
       case RIGHT.isDown:
         barryAllen.move("RIGHT");
         break;
-        case LEFT.isDown:
+      case LEFT.isDown:
         barryAllen.move("LEFT");
         break;
-        case UP.isDown:
+      case UP.isDown:
         barryAllen.move("UP");
         break;
-        case DOWN.isDown:
+      case DOWN.isDown:
         barryAllen.move("DOWN");
         break;
     }
   });
 }
-
+log(WIDTH,HEIGHT);
 //Main
 gameStart();
