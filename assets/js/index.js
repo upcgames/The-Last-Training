@@ -1,6 +1,8 @@
 //Constants
 const log = console.log;
-const renderer = new PIXI.Application(660, 660);
+const menu = document.getElementById("Menu");
+const btnPlay = document.getElementById("btnPlay");
+const renderer = new PIXI.Application(1140, 540);
 const screen = renderer.screen;
 const canvas = renderer.view;
 const stage = renderer.stage;
@@ -19,6 +21,7 @@ function gameStart() {
   document.body.appendChild(canvas);
   let housesArray = [];
   let city = new City(stage);
+  util.drawReference(stage, city);
   for (const i in city.matrix) {
     for (const j in city.matrix[i]) {
       if (city.matrix[i][j] == 1) {
@@ -27,7 +30,6 @@ function gameStart() {
       }
     }
   }
-  //util.drawReference(stage, city);
   let barryAllen = new Speedster(
     stage,
     "./assets/sprites/theFlash_sprite.png", //Sprite URL
@@ -37,7 +39,7 @@ function gameStart() {
   );
   ticker.add(() => {
     housesArray.forEach(element => {
-      bump.hit(barryAllen, element,true);
+      bump.hit(barryAllen, element, true);
     });
     switch (true) {
       case RIGHT.isDown:
@@ -56,5 +58,13 @@ function gameStart() {
   });
 }
 log(WIDTH, HEIGHT);
-//Main
-gameStart();
+let audio = new Audio("./assets/mp3/intro.mp3");
+window.onload = () => {
+  audio.play();
+};
+btnPlay.addEventListener("click", () => {
+  menu.hidden = true;
+  gameStart();
+  audio.pause();
+  audio.currentTime = 0;
+});

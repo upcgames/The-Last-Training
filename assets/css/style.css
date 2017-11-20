@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:900);
+* {
+  padding: 0;
+}
+
+body {
+  background-image: url("../../background.jpg");
+  background-size: cover;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 6px solid;
+  border-color: rgb(46, 38, 6);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.692);
+}

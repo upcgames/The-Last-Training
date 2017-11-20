@@ -8,19 +8,22 @@ class City extends PIXI.Sprite {
     this.matrix = [];
     const map = this.matrix;
     for (let i = 0; i < HEIGHT / 60; i++) {
-      map[i] = new Array(WIDTH / 60 + 1)
+      map[i] = new Array(WIDTH / 60+1)
         .join("0")
         .split("")
         .map(parseFloat);
     }
+    log(map);
+    log(map[0].length);
+    log(map.length);
 
     map[0][0] = "I";
     map[0][1] = 2;
     map[1][0] = 2;
-    map[map[0].length - 1][map.length - 1] = "F";
+    map[map.length - 1][map[0].length - 1] = "F";
 
     for (let i = 0; i < map.length; i++) {
-      for (let j = 0; j < map.length; j++) {
+      for (let j = 0; j < map[i].length; j++) {
         if (
           map[i][j] != "I" &&
           map[i][j] != "F" &&
@@ -29,7 +32,7 @@ class City extends PIXI.Sprite {
         ) {
           map[i][j] = 1;
           switch (true) {
-            case i == 0 && j == map.length - 1:
+            case i == 0 && j == map[i].length - 1:
               map[i + 1][j - 1] = 2;
               map[i][j - 1] = 2;
               map[i + 1][j] = 2;
@@ -39,7 +42,7 @@ class City extends PIXI.Sprite {
               map[i][j + 1] = 2;
               map[i - 1][j] = 2;
               break;
-            case i == 0 && j != map.length - 1:
+            case i == 0 && j != map[i].length - 1:
               map[i + 1][j - 1] = 2;
               map[i + 1][j + 1] = 2;
               map[i][j - 1] = 2;
@@ -60,7 +63,7 @@ class City extends PIXI.Sprite {
               map[i][j + 1] = 2;
               map[i - 1][j] = 2;
               break;
-            case j == map.length - 1:
+            case j == map[i].length - 1:
               map[i - 1][j - 1] = 2;
               map[i + 1][j - 1] = 2;
               map[i][j - 1] = 2;
@@ -83,7 +86,7 @@ class City extends PIXI.Sprite {
       }
     }
     for (let i = 0; i < map.length; i++) {
-      for (let j = 0; j < map.length; j++) {
+      for (let j = 0; j < map[i].length; j++) {
         if (map[i][j] == 2) {
           map[i][j] = 0;
         }

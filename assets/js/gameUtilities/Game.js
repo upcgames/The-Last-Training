@@ -37,8 +37,8 @@ class Game {
   getRandNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-  drawReference(stage, ciudad, speedster) {
-    const map = ciudad.matrix;
+  drawReference(stage, city) {
+    const map = city.matrix;
     for (const i in map) {
       for (const j in map[i]) {
         if (map[i][j] == 1) {
