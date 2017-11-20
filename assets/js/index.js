@@ -33,7 +33,7 @@ function gameStart() {
     "./assets/sprites/theFlash_sprite.png", //Sprite URL
     0, //x position
     0, //y position
-    10 //amount of Speed Force (lulz :v)
+    5 //amount of Speed Force (lulz :v)
   );
   ticker.add(() => {
     housesArray.forEach(element => {
