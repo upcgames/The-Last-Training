@@ -34,7 +34,10 @@ class Game {
   getRandBinary() {
     return Math.round(Math.random());
   }
-  drawReference(stage, ciudad) {
+  getRandNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  drawReference(stage, ciudad, speedster) {
     const map = ciudad.matrix;
     for (const i in map) {
       for (const j in map[i]) {

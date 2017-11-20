@@ -1,6 +1,6 @@
 //Constants
 const log = console.log;
-const renderer = new PIXI.Application(660,660);
+const renderer = new PIXI.Application(660, 660);
 const screen = renderer.screen;
 const canvas = renderer.view;
 const stage = renderer.stage;
@@ -17,8 +17,17 @@ let LEFT = util.keyboard(65),
 
 function gameStart() {
   document.body.appendChild(canvas);
-  let ciudad = new Ciudad(stage);
-  util.drawReference(stage,ciudad);
+  let housesArray = [];
+  let city = new City(stage);
+  for (const i in city.matrix) {
+    for (const j in city.matrix[i]) {
+      if (city.matrix[i][j] == 1) {
+        let house = new House(stage, j * 60, i * 60);
+        housesArray.push(house);
+      }
+    }
+  }
+  //util.drawReference(stage, city);
   let barryAllen = new Speedster(
     stage,
     "./assets/sprites/theFlash_sprite.png", //Sprite URL
@@ -27,6 +36,9 @@ function gameStart() {
     10 //amount of Speed Force (lulz :v)
   );
   ticker.add(() => {
+    housesArray.forEach(element => {
+      bump.hit(barryAllen, element,true);
+    });
     switch (true) {
       case RIGHT.isDown:
         barryAllen.move("RIGHT");
@@ -43,6 +55,6 @@ function gameStart() {
     }
   });
 }
-log(WIDTH,HEIGHT);
+log(WIDTH, HEIGHT);
 //Main
 gameStart();

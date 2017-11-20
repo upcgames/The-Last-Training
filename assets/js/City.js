@@ -1,6 +1,6 @@
-class Ciudad extends PIXI.Sprite {
+class City extends PIXI.Sprite {
   constructor(stage = null) {
-    super(PIXI.Texture.fromImage("./assets/sprites/ciudad.jpg"));
+    super(PIXI.Texture.fromImage("./assets/sprites/city/background2.png"));
     this.width = WIDTH;
     this.height = HEIGHT;
     this.x = 0;
