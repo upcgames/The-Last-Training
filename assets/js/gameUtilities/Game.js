@@ -121,6 +121,7 @@ class Game {
         path.forEach(coord => {
 
           graphics.beginFill(0xffc400);
+          graphics.alpha=0.2;
           if (typeof city.map[coord[1]][coord[0]] != "object") {
             graphics.drawRect(
               coord[0] * DISPLAY,
