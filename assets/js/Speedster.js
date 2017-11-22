@@ -2,8 +2,8 @@ class Speedster extends PIXI.Sprite {
   constructor(stage = null, url, x, y, speed) {
     super(PIXI.Texture.fromImage(url));
     this.interactive = true;
-    this.width = 55;
-    this.height = 55;
+    this.width = DISPLAY - 3;
+    this.height = DISPLAY - 3;
     this.x = x;
     this.y = y;
     this.center = {

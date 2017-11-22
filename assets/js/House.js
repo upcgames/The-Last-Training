@@ -8,10 +8,10 @@ class House extends PIXI.Sprite {
     ];
     let i = util.getRandNumber(0, 3);
     super(PIXI.Texture.fromImage(design[i]));
-    this.width = 60;
-    this.height = 60;
-    this.x = x;
-    this.y = y;
+    this.width = DISPLAY;
+    this.height = DISPLAY;
+    this.x = x * DISPLAY;
+    this.y = y * DISPLAY;
     if (stage) {
       stage.addChild(this);
     }
