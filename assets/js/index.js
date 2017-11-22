@@ -22,9 +22,9 @@ let canMove = "";
 function gameStart() {
   document.body.appendChild(canvas);
   let housesArray = [];
-  let city = new City(stage, 1);
+  let city = new City(stage, 8);
   util.drawMissionsRef(stage, city);
-  util.drawReference(stage, city);
+  //util.drawReference(stage, city);
   util.drawBestPath(stage, city);
   
   log(city.map);

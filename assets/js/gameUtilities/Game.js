@@ -72,6 +72,7 @@ class Game {
         if (typeof map[i][j] == "object" && bestNodes.includes(map[i][j].id)) {
           graphics.beginFill(0xffffff);
           graphics.drawRect(j * DISPLAY, i * DISPLAY, DISPLAY, DISPLAY);
+          //graphics.drawCircle((j * DISPLAY)+(DISPLAY/2), i * DISPLAY, DISPLAY, DISPLAY);
           stage.addChild(graphics);
         }
       }

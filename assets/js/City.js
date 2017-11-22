@@ -38,7 +38,7 @@ class City extends PIXI.Sprite {
               map[i][j] = {
                 id: index,
                 weight: util.getRandNumber(1, 3),
-                val: util.getRandNumber(1, 9) * 10,
+                val: (util.getRandNumber(1, 9- this.dificult + 6) ) * 10,
                 i: j,
                 j: i
               };
