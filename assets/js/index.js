@@ -78,7 +78,7 @@ function gameStart() {
 }
 let audio = new Audio("./assets/mp3/intro.mp3");
 window.onload = () => {
-  //audio.play();
+  audio.play();
 };
 btnPlay.addEventListener("click", () => {
   menu.hidden = true;
